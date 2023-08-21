@@ -18,21 +18,16 @@ const PORT = process.env.PORT || 9001
 const URI = process.env.URI
 const app = e();
 
+app.set('view engine', 'ejs')
+
 databaseConnect(URI)
 
-const testOptionalAdd = new RequestModel(
-    {
-        name: 'Jane Doe',
-        meat: 'Picanha',
-        bread: 'Italiano Branco',
-        optionals: ['Bacon', 'Salame', 'Cebola Roxa'],
-    }
-)
-
-testOptionalAdd.save().then(res => console.log(res)).catch(err => console.log(err))
-
 app.get('/', (req, res) => {
-    res.send('Hello')
+    res.render('index')
+})
+
+app.get('/request', (req, res) => {
+    res.render('request')
 })
 
 app.listen(PORT, () => {
