@@ -3,11 +3,7 @@ import { dirname } from 'path';
 import e from 'express';
 import { config } from 'dotenv'
 import { databaseConnect } from './database/dataConnect.js'
-import {BreadsModel} from './models/Breads.js'
-import {MeatModel} from './models/Meat.js'
-import { OptionalModel } from './models/Optional.js';
-import { StatusModel } from './models/Status.js';
-import { RequestModel } from './models/Requests.js';
+import { router } from './routes/orders.js';
 
 config()
 
@@ -19,16 +15,9 @@ const URI = process.env.URI
 const app = e();
 
 app.set('view engine', 'ejs')
+app.use(router)
 
 databaseConnect(URI)
-
-app.get('/', (req, res) => {
-    res.render('index')
-})
-
-app.get('/request', (req, res) => {
-    res.render('request')
-})
 
 app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`)
