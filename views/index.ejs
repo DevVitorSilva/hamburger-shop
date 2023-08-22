@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hamburger Shop</title>
 </head>
+
 <body>
-    <h1>Home</h1>
+    <h1>Monte seu hamburguer</h1>
     <a href="/request">Pedidos</a>
+    <!-- passar a rota onde o pedido será processado -->
+    <form action="/" method="get">
+        <div>
+            <span>Nome do cliente:</span>
+            <input type="text" placeholder="Digite seu nome" name="name">
+        </div>
+        <div>
+            <span>Escolha o pão:</span>
+            <select name="bread">
+                <option value="">Escolha seu pão</option>
+                <% for( let index=0; index < bread.length; index++ ) { %>
+                    <option value=<%- bread[index].type %>><%- bread[index].type%></option>
+                <% } %>
+            </select>
+        </div>
+        <div>
+            <span>Escolha a carne do seu hamburguer:</span>
+            <select name="meat">
+                <option value="">Selecione o tipo de carne</option>
+                <% for( let index=0; index < meat.length; index++ ) { %>
+                    <option value=<%- meat[index].type %>><%- meat[index].type %></option>
+                <% } %>
+            </select>
+        </div>
+        <div>
+            <% for( let index = 0; index < optional.length; index++ ) { %>
+                <input type="checkbox" name="optional" value=<%- optional[index].type %>>
+                <span><%- optional[index].type %></span>
+            <% } %>
+        </div>
+        <div>
+            <button type="submit">Criar meu hamburguer</button>
+        </div>
+    </form>
 </body>
+
 </html>
