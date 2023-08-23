@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const requestSchema = new Schema(
+const ordersSchema = new Schema(
     {
         name: {type: String, required: true},
         meat: {type: String, required: true},
@@ -13,8 +13,8 @@ const requestSchema = new Schema(
     }
 )
 
-const RequestModel = new model('request', requestSchema)
+const OrdersModel = new model('orders', ordersSchema)
 
 export {
-    RequestModel
+    OrdersModel
 }
