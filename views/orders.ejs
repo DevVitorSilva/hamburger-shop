@@ -1,13 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Pedidos</title>
 </head>
+
 <body>
     <h1>Pedidos</h1>
     <a href="/">Home</a>
-    <!-- deve ter um botão para atualizar o status -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Nome</th>
+                <th scope="col">Carne</th>
+                <th scope="col">Pão</th>
+                <th scope="col">Opcionais</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for( let index=0; index < orders.length; index++ ) { %>
+                <tr>
+                    <th scope="row"><%- index %></th>
+                    <td><%= orders[index].name %></td>
+                    <td><%= orders[index].meat %></td>
+                    <td><%= orders[index].bread %></td>
+                    <td><%= orders[index].optionals %></td>
+                    <td>
+                        <form method="post" action="/status?_method=PUT">
+                            <input type="text" hidden name="_id" value=<%- orders[index]._id%>>
+                            <select name="status">
+                                <% for( let index1=0; index1 < status.length; index1++ ) { %>
+                                    <option value=<%= status[index1].type %> 
+                                        <%= orders[index].status == status[index1].type ? 'selected' : ''  %> >
+                                        <%= status[index1].type %></option>
+                                <% } %>
+                            </select>
+                            <button type="submit">Alterar status</button>
+                        </form>
+                    </td>
+                </tr>
+
+            <% } %>
+        </tbody>
+    </table>
 </body>
+
 </html>
