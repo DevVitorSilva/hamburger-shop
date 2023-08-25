@@ -4,8 +4,11 @@ import { MeatModel } from "../models/Meat.js";
 import { OptionalModel } from "../models/Optional.js";
 import { StatusModel } from "../models/Status.js";
 import { OrdersModel } from "../models/Orders.js";
+import methodOverride from 'method-override'
 
 const router = Router()
+
+router.use(methodOverride('_method'))
 
 router.get('/', async (req, res) => {
     try {
@@ -26,8 +29,11 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/request', (req, res) => {
-    res.render('request')
+router.get('/orders', async (req, res) => {
+    const orders = await OrdersModel.find({})
+    const status = await StatusModel.find({})
+
+    res.render('orders', { orders, status })
 })
 
 router.post('/orders', e.urlencoded({ extended: true }), async (req, res) => {
@@ -42,11 +48,25 @@ router.post('/orders', e.urlencoded({ extended: true }), async (req, res) => {
         return res.status(412).send('Meat não pode ser vazio.')
     }
 
-    const orders = new OrdersModel({ name, bread, meat, optionals })
+    const orders = new OrdersModel({ name, bread, meat, optionals})
 
     await orders.save()
 
     res.status(201).redirect('/')
+})
+
+router.put('/status', e.urlencoded({ extended: true }), async (req, res) => {
+
+    try {
+        const { _id, status } = req.body
+        const teste = await OrdersModel.findByIdAndUpdate({_id}, {status}, {new: true, upsert: true}).lean()
+
+        console.log(status);
+        res.redirect('/orders')
+    } catch (error) {
+        console.log(error)
+        res.send('error')
+    }
 })
 
 export {
