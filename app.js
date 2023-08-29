@@ -15,6 +15,7 @@ const URI = process.env.URI
 const app = e();
 
 app.set('view engine', 'ejs')
+app.use(e.static('public'))
 app.use(router)
 
 databaseConnect(URI)
