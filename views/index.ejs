@@ -4,46 +4,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Hamburger Shop</title>
+
+    <style>
+        .main {
+            display: flex;
+            align-items: center;
+            background-image: url('assets/hamburger.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 600px;
+        }
+    </style>
+
 </head>
 
-<body>
-    <h1>Monte seu hamburguer</h1>
-    <a href="/orders">Pedidos</a>
-    <form action="/orders" method="post">
-        <div>
-            <span>Nome do cliente:</span>
-            <input type="text" placeholder="Digite seu nome" name="name" required minlength="3">
-        </div>
-        <div>
-            <span>Escolha o pão:</span>
-            <select required name="bread">
-                <option value="">Escolha seu pão</option>
-                <% for( let index=0; index < bread.length; index++ ) { %>
-                    <option value=<%- bread[index].type %>><%- bread[index].type%></option>
-                <% } %>
-            </select>
-        </div>
-        <div>
-            <span>Escolha a carne do seu hamburguer:</span>
-            <select required name="meat">
-                <option value="">Selecione o tipo de carne</option>
-                <% for( let index=0; index < meat.length; index++ ) { %>
-                    <option value=<%- meat[index].type %>><%- meat[index].type %></option>
-                <% } %>
-            </select>
-        </div>
-        <div>
-            <% for( let index = 0; index < optionals.length; index++ ) { %>
-                <input type="checkbox" name="optionals" value=<%- optionals[index].type %>>
-                <span><%- optionals[index].type %></span>
-            <% } %>
-        </div>
-        <div>
-            <button type="submit">Criar meu hamburguer</button>
-        </div>
-    </form>
+<body class="bg-body-secondary">
+    <div class="bg-dark-subtle sticky-top">
+        <header class="container">
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="#">
+                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/hamburger.png" alt="hamburger" />
+                    Hamburger Shop
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#monteSeuPedido">Monte seu pedido</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/orders">Pedidos</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    </div>
+    <main>
+        <section class="main container ps-0">
+            <h1 class="bg-body-secondary p-2 rounded-end">Bem-vindo ao Hamburger Shop</h1>
+        </section>
+        <section id="monteSeuPedido" style="height: 500px;" class="container d-flex flex-column align-items-center">
+            <h1 class="pt-4">Monte seu hamburguer</h1>
+            <form action="/orders" method="post">
+                <div class="d-flex flex-column mb-3">
+                    <span class="fs-5">Nome do cliente:</span>
+                    <input class="form-control" type="text" placeholder="Digite seu nome" name="name" required
+                        minlength="3">
+                </div>
+                <div class="d-flex flex-column mb-3">
+                    <span class="fs-5">Escolha o pão:</span>
+                    <select required name="bread" class="form-select">
+                        <option value="">Escolha seu pão</option>
+                        <% for( let index=0; index < bread.length; index++ ) { %>
+                            <option value=<%- bread[index].type %>><%- bread[index].type%></option>
+                            <% } %>
+                    </select>
+                </div>
+                <div class="d-flex flex-column mb-3">
+                    <span class="fs-5">Escolha a carne do seu hamburguer:</span>
+                    <select required name="meat" class="form-select">
+                        <option value="">Selecione o tipo de carne</option>
+                        <% for( let index=0; index < meat.length; index++ ) { %>
+                            <option value=<%- meat[index].type %>><%- meat[index].type %></option>
+                            <% } %>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <% for( let index=0; index < optionals.length; index++ ) { %>
+                        <input class="form-check-input" type="checkbox" name="optionals" value=<%- optionals[index].type
+                            %>>
+                        <span><%- optionals[index].type %></span>
+                        <% } %>
+                </div>
+                <div>
+                    <button class="btn btn-secondary" type="submit">Criar meu hamburguer</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <footer class="bg-dark-subtle d-flex justify-content-center align-items-center" style="height: 5rem;">
+        <p class="m-0">&copy; DevVitorSilva</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
