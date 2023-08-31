@@ -34,7 +34,7 @@ Pré-requisitos:
 
 ```bash
 #clonar repositório
-git clone endereço
+git clone https://github.com/DevVitorSilva/hamburger-shop.git
 ```
 
 ```bash
