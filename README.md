@@ -38,7 +38,7 @@ git clone https://github.com/DevVitorSilva/hamburger-shop.git
 ```
 
 ```bash
-#instalar dependêndias do projeto
+#instalar dependências do projeto
 npm i
 ```
 
